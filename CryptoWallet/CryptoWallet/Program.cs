@@ -42,16 +42,16 @@ var nonFungibleAssets = new List<Assets>()
 
 var fungibleAssets = new List<Assets>()
 {
-    new FungibleAsset(),
-    new FungibleAsset(),
-    new FungibleAsset(),
-    new FungibleAsset(),
-    new FungibleAsset(),
-    new FungibleAsset(),
-    new FungibleAsset(),
-    new FungibleAsset(),
-    new FungibleAsset(),
-    new FungibleAsset(),
+    new FungibleAsset("Bitcoin", 16911.40m, "BTC"),
+    new FungibleAsset("Ethereum", 1242.08m, "ETH"),
+    new FungibleAsset("Ripple", 0.39m, "XRP"),
+    new FungibleAsset("Binance coin", 29046m , "BNB"),
+    new FungibleAsset("Polkadot", 5.10m, "DOT"),
+    new FungibleAsset("Cardano", 0,32m,"ADA"),
+    new FungibleAsset("Polygon", 0.9222m ,"MATIC"),
+    new FungibleAsset("USD coin", 1.00m , "USDC"),
+    new FungibleAsset("Dogecoin", 0.10m, "DOGE"),
+    new FungibleAsset("Tether", 1.00m, "USDT"),
 
 
 };
