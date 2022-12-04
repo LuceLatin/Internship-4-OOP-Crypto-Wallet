@@ -19,6 +19,7 @@ using CryptoWallet.Classes.Wallets;
 using CryptoWallet.Classes.Assets;
 using CryptoWallet.Classes.Transactions;
 using System.Xml.Serialization;
+using System;
 
 
 var wallets = new List<Wallets>()
@@ -35,10 +36,6 @@ var wallets = new List<Wallets>()
 
 };
 
-var nonFungibleAssets = new List<Assets>()
-{
-
-};
 
 var fungibleAssets = new List<Assets>()
 {
@@ -47,7 +44,7 @@ var fungibleAssets = new List<Assets>()
     new FungibleAsset("Ripple", 0.39m, "XRP"),
     new FungibleAsset("Binance coin", 29046m , "BNB"),
     new FungibleAsset("Polkadot", 5.10m, "DOT"),
-    new FungibleAsset("Cardano", 0,32m,"ADA"),
+    new FungibleAsset("Cardano", 0.32m,"ADA"),
     new FungibleAsset("Polygon", 0.9222m ,"MATIC"),
     new FungibleAsset("USD coin", 1.00m , "USDC"),
     new FungibleAsset("Dogecoin", 0.10m, "DOGE"),
@@ -56,112 +53,185 @@ var fungibleAssets = new List<Assets>()
 
 };
 
+var addressOfAsset = fungibleAssets[1].Address;
+var nonFungubleAssets = new List<Assets>()
+{
+    new NonFungibleAsset("KILLABERS", 2.97m , addressOfAsset),
+    new NonFungibleAsset("Abstraction", 0.40m , addressOfAsset),
+    new NonFungibleAsset("RarePass", 34m ,addressOfAsset),
+    new NonFungibleAsset("The Sandbox", 1.07m , addressOfAsset),
+    new NonFungibleAsset("Azuki", 9.75m, addressOfAsset),
+    new NonFungibleAsset("Valhalla", 0.75m , addressOfAsset),
+    new NonFungibleAsset("Doodles", 7m , addressOfAsset),
+    new NonFungibleAsset("Pudgy Penguins", 3.4m , addressOfAsset),
+    new NonFungibleAsset("Decentraland", 1.3m , addressOfAsset),
+    new NonFungibleAsset("Mutant Ape Yacht Club", 13.75m , addressOfAsset),
+    new NonFungibleAsset("Bored Ape Yacht Club", 68.95m , addressOfAsset),
+    new NonFungibleAsset("The Memes by 6529", 0.25m , addressOfAsset),
+    new NonFungibleAsset("Rug Radio", 0.52m , addressOfAsset),
+    new NonFungibleAsset("Dabloons Adventure", 0.05m , addressOfAsset),
+    new NonFungibleAsset("Pre-Process", 7.49m , addressOfAsset),
+    new NonFungibleAsset("Mystery of Chessboxing by anon", 0.1m , addressOfAsset),
+    new NonFungibleAsset("Cel Mates by Mcbess", 0.43m , addressOfAsset),
+    new NonFungibleAsset("Crypto Unicorns Market", 0.01m , addressOfAsset),
+    new NonFungibleAsset("Cel Mates Hello World", 0.3m, addressOfAsset),
+    new NonFungibleAsset("Oderdeed for Otherside",1.31m , addressOfAsset),
+
+};
+
 void MainMenu()
 {
+    Console.WriteLine("Crypto Wallet");
+    Console.WriteLine("1 - Create wallet");
+    Console.WriteLine("2 - Access the wallet");
     Console.WriteLine("Enter number");
     int num;
 
-    var choice = (Console.ReadLine());
-    var result = int.TryParse(choice, out num);
-    if (result == false )
+    do
     {
-        Console.WriteLine("It is necessary to enter a NUMBER");
-        return;
+        Console.WriteLine("Enter number");
+        var choice = (Console.ReadLine());
+        var result = int.TryParse(choice, out num);
+        if (result == false)
+        {
+            Console.WriteLine("It is necessary to enter a NUMBER");
+        }
+        else if (num < 0 || num > 3)
+        {
+
+            if (Confirmation()) break;
+
+
+        }
+        else if (result == true && num >= 0 && num <= 3)
+            break;
     }
-     
-    switch(num)
+    while (true);
+    switch (num)
     {
         case 1:
-            Console.WriteLine("1 - Create wallet");
+            Console.Clear();
+            Console.WriteLine("Create wallet:");
             CreateWallet();
             break;
         case 2:
-            Console.WriteLine("2 - Access the wallet");
+            Console.Clear();
+            Console.WriteLine("Access the wallet:");
             AccessTheWallet();
             break;
-        default:
-            if(!Confirmation()); //popravi
-            break;
-
-    }
-
-
         
 
-
-    
+    }
+    /*
     Console.WriteLine("Bitcoin wallet");
     Console.WriteLine("Ethereum wallet");
     Console.WriteLine("Solana wallet");
+    */
 }
 
 void CreateWallet()
 {
-    Console.WriteLine("Enter number");
+    Console.WriteLine("0 - Main Menu");
+    Console.WriteLine("1 - Bitcoin wallet");
+    Console.WriteLine("2 - Ethereum wallet");
+    Console.WriteLine("3 - Solana wallet");
+
+   
     int num;
 
-    var choice = (Console.ReadLine());
-    var result = int.TryParse(choice, out num);
-    if (result == false)
-    {
-        Console.WriteLine("It is necessary to enter a NUMBER");
-        return;
+    do {
+        Console.WriteLine("Enter number");
+        var choice = (Console.ReadLine());
+        var result = int.TryParse(choice, out num);
+        if (result == false)
+        {
+            Console.WriteLine("It is necessary to enter a NUMBER");
+        }
+        else if (num < 0 || num > 3)
+        {
+            
+            if (Confirmation()) break;
+            
+            
+        }
+        else if(result== true && num >=0 && num <=3)
+            break;
     }
+    while (true);
+    
 
     switch (num)
     {
+        case 0:
+            Console.WriteLine("Back to main menu.");
+            MainMenu();
+            break;
         case 1:
-            Console.WriteLine("1 - Bitcoin wallet");
-
+            Console.WriteLine("Bitcoin wallet:");
+            wallets.Add(new BitcoinWallet());
+            Console.WriteLine("A new Bitcoin wallet has just been added. ");
 
             break;
         case 2:
-            Console.WriteLine("2 - Ethereum wallet");
+            Console.WriteLine("Ethereum wallet:");
+            wallets.Add(new EthereumWallet());
+            Console.WriteLine("A new Ethereum wallet has just been added. ");
 
             break;
         case 3:
-            Console.WriteLine("3 - Solana wallet");
+            Console.WriteLine("Solana wallet:");
+            wallets.Add(new SolanaWallet());
+            Console.WriteLine("A new Solana wallet has just been added. ");
 
             break;
-        default:
-            if (!Confirmation()) ; //popravi
-            break;
+        
 
     }
 }
 
 void AccessTheWallet()
 {
-    Console.WriteLine("Enter number");
+    Console.WriteLine("1 - Portfolio");
+    Console.WriteLine("2 - Transfer");
+    Console.WriteLine("3 - Transaction history");
     int num;
-
-    var choice = (Console.ReadLine());
-    var result = int.TryParse(choice, out num);
-    if (result == false)
+    do
     {
-        Console.WriteLine("It is necessary to enter a NUMBER");
-        return;
+        Console.WriteLine("Enter number");
+        var choice = (Console.ReadLine());
+        var result = int.TryParse(choice, out num);
+        if (result == false)
+        {
+            Console.WriteLine("It is necessary to enter a NUMBER");
+        }
+        else if (num < 0 || num > 3)
+        {
+
+            if (Confirmation()) break;
+        }
+        else if (result == true && num >= 0 && num <= 3)
+            break;
     }
+    while (true);
+
 
     switch (num)
     {
         case 1:
-            Console.WriteLine("1 - Portfolio");
+            Console.WriteLine("Portfolio: ");
             Portfolio();
             break;
         case 2:
-            Console.WriteLine("2 - Transfer");
+            Console.WriteLine("Transfer: ");
             Transfer();
             break;
         case 3:
-            Console.WriteLine("3 - Transaction history");
+            Console.WriteLine("Transaction history: ");
             TransactionHistory();
-            break;
-        default:                    //povratak na inicijalni meni
-            if (!Confirmation()) ; //popravi 
             break;
 
     }
+
 }
 
 void Portfolio()
@@ -195,3 +265,4 @@ bool Confirmation()
 
 
 MainMenu();
+

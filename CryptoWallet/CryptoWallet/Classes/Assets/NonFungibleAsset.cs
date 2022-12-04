@@ -10,11 +10,11 @@ namespace CryptoWallet.Classes.Assets
     public class NonFungibleAsset : Assets
     {
         private Guid _addressOfFungibleAssets;
-        private Decimal _value { get; } //moguce dohvatiti ne i mijenjati u klasi?
+        
 
-        public NonFungibleAsset() : base()
+        public NonFungibleAsset(string name, Decimal value, Guid adressOfFungibleAssets) : base(name, value)
         {
-
+            _addressOfFungibleAssets= adressOfFungibleAssets;
         }
 
     }

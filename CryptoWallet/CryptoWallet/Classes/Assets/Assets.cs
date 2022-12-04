@@ -9,12 +9,15 @@ namespace CryptoWallet.Classes.Assets
 {
     public class Assets
     {
-        private Guid _address;
+        public Guid Address { get; }
         public string Name; //Unique vrijednost što znači da ne mogu postojat dva fungible asseta s istim imenom
-        
-        public Assets() 
+        private Decimal _value { get; } //moguce dohvatiti ne i mijenjati u klasi?
+
+        public Assets(string name, Decimal value) 
         { 
-            _address = Guid.NewGuid();
+            Address = Guid.NewGuid();
+            Name = name;
+            _value = value;
 
         }
     }

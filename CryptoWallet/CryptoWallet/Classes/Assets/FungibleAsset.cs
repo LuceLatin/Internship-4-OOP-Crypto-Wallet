@@ -10,9 +10,9 @@ namespace CryptoWallet.Classes.Assets
     {
         private string _label; //(skraćena verzija imena kao što je BTC za Bitcoin)  //UNIQUE
 
-        public FungibleAsset() : base()
+        public FungibleAsset(string name, Decimal value, string label) : base(name, value)
         {
-            
+            _label = label;
         }
 
     }
