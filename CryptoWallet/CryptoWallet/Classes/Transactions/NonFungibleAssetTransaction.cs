@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CryptoWallet.Classes.Transactions
 {
-    public class NonFungibleAssetTransaction : Transactions
+    public class NonFungibleAssetTransaction : Transaction
     {
 
         private Guid _addressOfNonFungibleAsset;

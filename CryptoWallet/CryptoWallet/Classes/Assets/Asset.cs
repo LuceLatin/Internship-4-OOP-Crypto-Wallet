@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace CryptoWallet.Classes.Assets
 {
-    public class Assets
+    public class Asset
     {
         public Guid Address { get; }
-        public string Name; //Unique vrijednost što znači da ne mogu postojat dva fungible asseta s istim imenom
-        private Decimal _value { get; } //moguce dohvatiti ne i mijenjati u klasi?
+        public string Name { get; set; } //Unique vrijednost što znači da ne mogu postojat dva fungible asseta s istim imenom
+        public Decimal Value { get; private set; } //moguce dohvatiti ne i mijenjati u klasi?
 
-        public Assets(string name, Decimal value) 
+        public Asset(string name, Decimal value) 
         { 
             Address = Guid.NewGuid();
             Name = name;
-            _value = value;
+            Value = value;
 
         }
     }

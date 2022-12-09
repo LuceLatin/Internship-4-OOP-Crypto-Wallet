@@ -37,7 +37,7 @@ var wallets = new List<Wallets>()
 };
 
 
-var fungibleAssets = new List<Assets>()
+var fungibleAssets = new List<Asset>()
 {
     new FungibleAsset("Bitcoin", 16911.40m, "BTC"),
     new FungibleAsset("Ethereum", 1242.08m, "ETH"),
@@ -53,8 +53,9 @@ var fungibleAssets = new List<Assets>()
 
 };
 
+var listOfTransactions = new List<Transaction>();
 var addressOfAsset = fungibleAssets[1].Address;
-var nonFungubleAssets = new List<Assets>()
+var nonFungubleAssets = new List<Asset>()
 {
     new NonFungibleAsset("KILLABERS", 2.97m , addressOfAsset),
     new NonFungibleAsset("Abstraction", 0.40m , addressOfAsset),
@@ -79,14 +80,9 @@ var nonFungubleAssets = new List<Assets>()
 
 };
 
-void MainMenu()
+int InputNumber()
 {
-    Console.WriteLine("Crypto Wallet");
-    Console.WriteLine("1 - Create wallet");
-    Console.WriteLine("2 - Access the wallet");
-    Console.WriteLine("Enter number");
     int num;
-
     do
     {
         Console.WriteLine("Enter number");
@@ -107,6 +103,16 @@ void MainMenu()
             break;
     }
     while (true);
+    return num;
+}
+void MainMenu()
+{
+    Console.Clear();
+    Console.WriteLine("Crypto Wallet");
+    Console.WriteLine("1 - Create wallet");
+    Console.WriteLine("2 - Access the wallet");
+
+    var num = InputNumber();
     switch (num)
     {
         case 1:
@@ -136,28 +142,8 @@ void CreateWallet()
     Console.WriteLine("2 - Ethereum wallet");
     Console.WriteLine("3 - Solana wallet");
 
-   
-    int num;
 
-    do {
-        Console.WriteLine("Enter number");
-        var choice = (Console.ReadLine());
-        var result = int.TryParse(choice, out num);
-        if (result == false)
-        {
-            Console.WriteLine("It is necessary to enter a NUMBER");
-        }
-        else if (num < 0 || num > 3)
-        {
-            
-            if (Confirmation()) break;
-            
-            
-        }
-        else if(result== true && num >=0 && num <=3)
-            break;
-    }
-    while (true);
+    var num = InputNumber();
     
 
     switch (num)
@@ -191,32 +177,26 @@ void CreateWallet()
 
 void AccessTheWallet()
 {
+    PrintWallets();
+    Console.WriteLine("Enter address:"); //nadopuni
+    foreach (var item in wallets)
+    {
+        Console.WriteLine(item.Address); //prebacit 
+    }
+    Console.WriteLine("-------------------------------------------");
+    Console.WriteLine("0 - Main Menu");
     Console.WriteLine("1 - Portfolio");
     Console.WriteLine("2 - Transfer");
     Console.WriteLine("3 - Transaction history");
-    int num;
-    do
-    {
-        Console.WriteLine("Enter number");
-        var choice = (Console.ReadLine());
-        var result = int.TryParse(choice, out num);
-        if (result == false)
-        {
-            Console.WriteLine("It is necessary to enter a NUMBER");
-        }
-        else if (num < 0 || num > 3)
-        {
-
-            if (Confirmation()) break;
-        }
-        else if (result == true && num >= 0 && num <= 3)
-            break;
-    }
-    while (true);
-
+    
+    var num = InputNumber();
 
     switch (num)
     {
+        case 0: 
+            Console.WriteLine("Back to main menu: ");
+            MainMenu();
+            break;
         case 1:
             Console.WriteLine("Portfolio: ");
             Portfolio();
@@ -263,6 +243,14 @@ bool Confirmation()
     
 }
 
+void PrintWallets()
+{
+    Console.WriteLine("All wallets: ");
+    foreach (var wallet in wallets)
+    {
+        wallet.PrintAllWallets(listOfTransactions, fungibleAssets);
+    }
+}
 
 MainMenu();
 

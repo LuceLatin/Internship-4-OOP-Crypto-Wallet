@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CryptoWallet.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,15 +7,17 @@ using System.Threading.Tasks;
 
 namespace CryptoWallet.Classes.Assets
 {
-    public class FungibleAsset : Assets
+    public class FungibleAsset : Asset
     {
-        private string _label; //(skraćena verzija imena kao što je BTC za Bitcoin)  //UNIQUE
+        public string Label { get; set; } //(skraćena verzija imena kao što je BTC za Bitcoin)  //UNIQUE
 
         public FungibleAsset(string name, Decimal value, string label) : base(name, value)
         {
-            _label = label;
+            Label = label;
         }
 
+
+        //nasljediti IFungible
     }
 
 

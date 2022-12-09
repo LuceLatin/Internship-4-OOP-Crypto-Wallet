@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace CryptoWallet.Classes.Transactions
 {
-    public class Transactions
+    public class Transaction
     {
         private Guid Id;
         public DateTime Date { get; }
 
-        public bool HasBeenRecalled;
+        public bool HasBeenRecalled = false;
 
 
 
-        public Transactions(DateTime date)
+        public Transaction(DateTime date)
         { 
             Id= Guid.NewGuid();
             Date = date;
